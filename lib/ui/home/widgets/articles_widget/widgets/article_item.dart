@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c20/core/resources/colors_manager.dart';
 
-import '../../../../../model/articles/Article.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../../../../../data/model/articles/Article.dart';
 class ArticleItem extends StatelessWidget {
   final Article article;
   const ArticleItem({super.key,required this.article});

@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news_c20/core/resources/assets_manager.dart';
 import 'package:news_c20/core/resources/colors_manager.dart';
 import 'package:news_c20/core/resources/strings_manager.dart';
-import 'package:news_c20/model/category_model.dart';
+
+import '../../../../../data/model/category_model.dart';
 
 class CategoryItem extends StatelessWidget {
   final int index;

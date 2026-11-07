@@ -3,9 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c20/core/remote/network/api_manager.dart';
 import 'package:news_c20/core/resources/app_constants.dart';
-import 'package:news_c20/model/sources/Source.dart';
+import 'package:news_c20/data/datasource/sources_dao.dart';
+import 'package:news_c20/data/datasource_impl/sources/sources_api_dao_impl.dart';
+import 'package:news_c20/data/repository_impl/sources_repo_impl.dart';
+import 'package:news_c20/repository/sources_repo.dart';
 import 'package:news_c20/ui/home/widgets/articles_widget/viewmodel/articles_view_model.dart';
 import 'package:news_c20/ui/home/widgets/articles_widget/widgets/articles_list/articles_list.dart';
+
+import '../../../../data/model/sources/Source.dart';
 
 class ArticlesWidget extends StatefulWidget {
   final String categoryId;
@@ -18,8 +23,8 @@ class ArticlesWidget extends StatefulWidget {
 class _ArticlesWidgetState extends State<ArticlesWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => ArticlesViewModel()..getSources(widget.categoryId),
+    return BlocProvider( // DI ??
+        create: (context) => ArticlesViewModel(SourcesRepoImpl(SourcesApiDaoImpl(ApiManager())))..getSources(widget.categoryId),
         child: BlocBuilder<ArticlesViewModel,ArticlesStates>(
             builder: (context, state) {
               switch(state){

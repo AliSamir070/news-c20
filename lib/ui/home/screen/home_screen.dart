@@ -4,10 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news_c20/core/remote/network/api_manager.dart';
 import 'package:news_c20/core/resources/assets_manager.dart';
 import 'package:news_c20/core/resources/strings_manager.dart';
-import 'package:news_c20/model/category_model.dart';
 import 'package:news_c20/ui/home/widgets/app_drawer.dart';
 import 'package:news_c20/ui/home/widgets/articles_widget/articles_widget.dart';
 import 'package:news_c20/ui/home/widgets/category_widget/categories_widget.dart';
+
+import '../../../data/model/category_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

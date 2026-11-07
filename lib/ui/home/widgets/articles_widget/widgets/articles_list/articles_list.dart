@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c20/core/remote/network/api_manager.dart';
-import 'package:news_c20/model/articles/Article.dart';
+import 'package:news_c20/data/datasource_impl/articles/articles_api_dao_impl.dart';
+import 'package:news_c20/data/repository_impl/articles_repo_impl.dart';
 import 'package:news_c20/ui/home/widgets/articles_widget/widgets/article_item.dart';
 import 'package:news_c20/ui/home/widgets/articles_widget/widgets/articles_list/viewmodel/articles_list_view_model.dart';
+
+import '../../../../../../data/model/articles/Article.dart';
 
 class ArticlesList extends StatefulWidget {
   final String sourceId;
@@ -18,7 +21,7 @@ class _ArticlesListState extends State<ArticlesList> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ArticlesListViewModel()..getArticlesList(widget.sourceId),
+        create: (context) => ArticlesListViewModel(ArticlesRepoImpl(ArticlesApiDaoImpl(ApiManager())))..getArticlesList(widget.sourceId),
       child: BlocBuilder<ArticlesListViewModel,ArticlesListStates>(
           builder: (context, state) {
             switch(state){

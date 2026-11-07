@@ -1,24 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_c20/core/resources/app_constants.dart';
-import 'package:news_c20/model/articles/ArticlesResponse.dart';
-import 'package:news_c20/model/sources/Sources_response.dart';
+import '../../../data/model/articles/ArticlesResponse.dart';
+import '../../../data/model/sources/Sources_response.dart';
 
+@singleton
 class ApiManager {
-  static Dio dio = Dio(
+  Dio dio = Dio(
     BaseOptions(
       baseUrl: "https://newsapi.org"
     )
   );
     //
-  static Future<SourcesResponse> getSources(String categoryId)async{
+  Future<SourcesResponse> getSources(String categoryId)async{
     var response = await dio.get("/v2/top-headlines/sources",queryParameters: {
       "apiKey":AppConstants.apiKey,
-      "category":categoryId
+      "category":categoryId,
     });
     var sourcesResponse = SourcesResponse.fromJson(response.data);
     return sourcesResponse;
   }
-  static Future<ArticlesResponse> getArticles(String sourceId)async{
+  Future<ArticlesResponse> getArticles(String sourceId)async{
     var response = await dio.get("/v2/everything",queryParameters: {
       "apiKey":AppConstants.apiKey,
       "sources":sourceId

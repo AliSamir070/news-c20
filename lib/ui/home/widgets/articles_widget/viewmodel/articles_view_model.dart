@@ -2,17 +2,19 @@
 // event : stream where widget sends event data to bloc (viewmodel)
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_c20/core/remote/network/api_manager.dart';
+import 'package:news_c20/repository/sources_repo.dart';
 
-import '../../../../../model/sources/Source.dart';
+import '../../../../../data/model/sources/Source.dart';
+
 
 class ArticlesViewModel extends Cubit<ArticlesStates>{
-  ArticlesViewModel():super(LoadingState());
-
+  ArticlesViewModel(this.sourcesRepo):super(LoadingState());
+  SourcesRepo sourcesRepo;
   getSources(String categoryId)async{
     try{
       // logic of loading
       emit(LoadingState());
-      var response = await ApiManager.getSources(categoryId);
+      var response = await sourcesRepo.FetchSources(categoryId);
       if(response.status == "error"){
         // logic of server error
         emit(ErrorState(response.message??""));
